@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dr5svediyb6lw"
-path="res://.godot/imported/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3-a30d5d7f10b4ca0d85eb801cf76ee1fa.mp3str"
+path="res://.godot/imported/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3-0a667ca4f21843c0b7fec73f92d5e7f4.mp3str"
 
 [deps]
 
-source_file="res://assets/audio2/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3"
-dest_files=["res://.godot/imported/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3-a30d5d7f10b4ca0d85eb801cf76ee1fa.mp3str"]
+source_file="res://assets/audio/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3"
+dest_files=["res://.godot/imported/dramatic-epic-trailer-soundtrack-with-building-tension-249852.mp3-0a667ca4f21843c0b7fec73f92d5e7f4.mp3str"]
 
 [params]
 

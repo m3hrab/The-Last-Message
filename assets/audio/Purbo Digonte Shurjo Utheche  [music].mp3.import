@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://ksdkyog60smw"
-path="res://.godot/imported/Purbo Digonte Shurjo Utheche  [music].mp3-8c56105cd98974b86a71c111ca61a3c4.mp3str"
+path="res://.godot/imported/Purbo Digonte Shurjo Utheche  [music].mp3-34664de711284f89d06f5b81a4d6e52c.mp3str"
 
 [deps]
 
-source_file="res://assets/audio2/Purbo Digonte Shurjo Utheche  [music].mp3"
-dest_files=["res://.godot/imported/Purbo Digonte Shurjo Utheche  [music].mp3-8c56105cd98974b86a71c111ca61a3c4.mp3str"]
+source_file="res://assets/audio/Purbo Digonte Shurjo Utheche  [music].mp3"
+dest_files=["res://.godot/imported/Purbo Digonte Shurjo Utheche  [music].mp3-34664de711284f89d06f5b81a4d6e52c.mp3str"]
 
 [params]
 
