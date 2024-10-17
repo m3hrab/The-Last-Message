@@ -10,11 +10,13 @@ var gravity = 800
 var is_attacking = false
 var attack_cooldown = 0.5  # Attack cooldown in seconds
 var attack_timer = 0.0
-
+var is_not_dead = true
 # Reference nodes
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var attack_area = $AttackArea
+@onready var attack_area: Area2D = $AttackArea
 
+var health = 1
+		
 func _physics_process(delta):
 	# Apply gravity
 	velocity.y += gravity * delta
@@ -59,43 +61,62 @@ func handle_movement(delta):
 	if velocity.x != 0:
 		animated_sprite.flip_h = velocity.x < 0
 
-	# Play appropriate animations
-	if not is_on_floor():
-		animated_sprite.play("jump")
-	elif velocity.x != 0:
-		# Play "run" if running, otherwise "walk"
-		if current_speed == run_speed:
-			animated_sprite.play("run")
+	#if velocity.x != 0:
+		#animated_sprite.flip_h = velocity.x < 0
+#
+		## Flip the attack area position based on the direction
+		#if velocity.x < 0:
+			#attack_area.position.x = -abs(attack_area.position.x)  # Move to the left
+		#else:
+			#attack_area.position.x = abs(attack_area.position.x) 
+
+	if is_not_dead:
+		# Play appropriate animations
+		if not is_on_floor():
+			animated_sprite.play("jump")
+			
+		elif velocity.x != 0:
+			# Play "run" if running, otherwise "walk"
+			if current_speed == run_speed:
+				animated_sprite.play("run")
+			else:
+				animated_sprite.play("walk")
 		else:
-			animated_sprite.play("walk")
+			animated_sprite.play("idle")
 	else:
-		animated_sprite.play("idle")
+		animated_sprite.play("dead")
+		await get_tree().create_timer(.5).timeout
+		get_tree().reload_current_scene()
+		
 
 func perform_attack():
+	
+	var overlapping_objects = $AttackArea.get_overlapping_areas()
+	for area in overlapping_objects:
+		var parentNode = area.get_parent()
+		parentNode.take_damage()
 	# Set attack state
 	is_attacking = true
 	attack_timer = attack_cooldown
 
 	# Play attack animation
 	animated_sprite.play("attack")
+ 
 
-	## Enable the attack area (collision detection)
-	#attack_area.monitoring = true
-	#attack_area.monitorable = true
+func _on_kill_zone_dead() -> void:
+	print("Called on Player")
+	#is_not_dead = false
 	
-	var overlapping_objects = $AttackArea.get_overlapping_areas()
-	for area in overlapping_objects:
-		var parent = area.get_parent()
-		print(parent.name)
+# Player script
 
+# Function to handle taking damage
+func take_damage():
+	health -= 1  # Assuming health is a variable tracking player health
+	if health <= 0:
+		die()  # Call the die function if health is 0 or less
 
-func _on_attack_area_body_entered(body: Node2D) -> void:
-	if is_attacking and body.is_in_group("enemies"):
-		body.take_damage(1)  # Call a method on the enemy to deal damage
-
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == "attack1":
-		attack_area.monitoring = false  # Disable the hit detection after attack finishes
-		attack_area.monitorable = false
-		print("Worked")
+# Function to play the player's death animation
+func die():
+	animated_sprite.play("dead")  # Assuming you have a sprite variable for player's AnimatedSprite2D
+	await get_tree().create_timer(.5).timeout
+	get_tree().reload_current_scene()

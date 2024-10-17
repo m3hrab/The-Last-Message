@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://chckcjeyv55av"]
+
+[ext_resource type="Script" path="res://kill_zone.gd" id="1_mvnoa"]
+
+[node name="KillZone" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_mvnoa")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
